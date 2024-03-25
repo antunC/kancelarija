@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Virtual Assistant Jarvis</title>
+    <style>
+        #body{
+            background-color: rgb(16,16,16);
+            color: green;
+            margin-top: 100px;
+
+        }
+        h1{
+            color: green;
+
+            text-align: center  ;
+            width: auto;
+            
+        }
+        #start{
+            color: white;
+            width: 100px;
+            height: 50px;
+            border: none;
+            background-color: #1d4fdb;
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        #end{
+            color: white;
+            width: 100px;
+            height: 50px;
+            border: none;
+            background-color: #db1d1d;
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        } 
+        .actions{
+            text-align: center;
+        }
+        
+        
+    </style>
+</head>
+<body onload="greeting()" id="body">
+<h1> Hello , I am Jarvis , Your Virtual Assistant , <br>How Can I Help You ?</h1>
+<div class="wrapper">
+    <div class="actions">
+        <button id="start">Talk</button>
+        <button id="end">End</button>
+        <br><br><br>
+    </div>
+
+    
+    
+
+    <div id="transcript" id="otkrij">
+    
+    </div>
+    <div id="odgovor">
+
+    </div>
+</div>
+<script>
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+const transcript_element = document.getElementById("transcript");
+const talk_button = document.getElementById("start");
+const end_button = document.getElementById("end");
+
+let p = document.createElement("p");
+transcript_element.appendChild(p);
+
+let otkrij = document.getElementById("otkrij");
+
+const odgovor = document.getElementById("odgovor");
+recognition.addEventListener("result", (e) =>{
+    const transcript = Array.from(e.results)
+    .map(result => result [0])
+    .map(result => result.transcript)
+    .join("");
+    p.textContent = transcript;
+
+    if(e.results[0].isFinal){
+        
+
+        
+
+        if(transcript.includes("YouTube")){
+            window.open('https://www.youtube.com/')
+        }
+        if(transcript.includes("Facebook")){
+            window.open('https://web.facebook.com/?locale=hr_HR&_rdc=1&_rdr')
+        }
+        if(transcript.includes("WhatsApp")){
+            window.open('https://web.whatsapp.com/')
+        }
+        if(transcript.includes("Gmail")){
+            window.open('https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox')
+        }
+        if(transcript.includes("Google Translate")){
+            window.open('https://translate.google.hr/?hl=hr')
+        }
+
+        if(transcript.includes("how are you"||"How are you")){
+            odgovor.append("I am fine    ");
+        }
+        if(transcript.includes("What is your name"||"what is your name")){
+            odgovor.append("My name is Jarvis    ");
+        }
+
+
+        if(transcript.includes("set background color to red")){
+            document.getElementById("body").style.backgroundColor = "red";
+            console.log("la");
+        }
+        if(transcript.includes("set background color to blue")){
+            document.getElementById("body").style.backgroundColor = "blue";
+            console.log("la");
+        }
+        if(transcript.includes("set background color to yellow")){
+            document.getElementById("body").style.backgroundColor = "yellow";
+            console.log("la");
+        }
+        if(transcript.includes("set background color to de  fault")){
+            document.getElementById("body").style.backgroundColor = "rgb(16,16,16)";
+            console.log("la");
+        }
+
+        if(transcript.includes("Who is the best waterpolo player of all time" )){
+            odgovor.append("Its of course  ANTUN ČAGALJ ");
+        }
+
+        if(transcript.includes("move to left" )){
+            let x = document.getElementById("body")
+            x.style.marginLeft = "0px"
+            x.style.transition = "2s"
+            x.style.float="left"
+        }
+
+        if(transcript.includes("move to right" )){
+            let x = document.getElementById("body")
+            x.style.marginRight = "0px"
+            x.style.transition = "2s"
+            x.style.float="right"
+        }
+
+        if(transcript.includes("move to Middle" || "move to middle")){
+            let x = document.getElementById("body")
+            // x.style.marginRight = "40%"
+            // x.style.transition = ""
+            // x.style.float="center"
+
+            // x.style.display = "flex";
+            // x.style.alignitems = "center"
+            // x.style.justifycontent ="center"
+
+            // x.style.marginRight = "40%"
+            // x.style.transition = "2s"
+
+            x.style.margin = "auto"
+            x.style.textAlign = "center"
+        }
+
+
+
+    }
+
+});
+
+function greeting(){
+    alert("Have A Good Day !")
+}
+recognition.addEventListener("end", ()=>{
+    end_button.disabled = false;
+    talk_button.disabled = true;
+});
+talk_button.addEventListener("click", () =>{
+    end_button.disabled = false;
+    talk_button.disabled = true;
+    recognition.start();
+});
+end_button.addEventListener("click", () => {
+    end_button.disabled = true;
+    talk_button.disabled = false;
+    recognition.stop();
+});
+
+
+
+</script>
+</body>
+</html> 
