@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="sljedeci">sljedeci</button>
+    <script>
+        class Auto{
+            constructor(marka,model,kilometraza){
+                this.marka = marka;
+                this.model = model;
+                this.kilometraza = kilometraza;
+            }
+        }
+        let auto = [];
+        for (i = 0; i < 3; i++){
+            let marka = prompt("Unesite marku:");
+            let model = prompt("Unesi model:");
+            let kilometraza = prompt("Unesi kilometrazu:")
+
+            auto[i] = new Auto(marka,model,kilometraza);
+            auto[i].potvrda()
+        }
+        let k = 1;
+        document.getElementById("sljedeci").addEventListener("click",()=>{
+            ispisAuta(niz[i]);
+            k++;
+            if(k > niz.length - 1){
+                k = 0;
+            }
+        });
+        </script>
+</body>
+</html>
